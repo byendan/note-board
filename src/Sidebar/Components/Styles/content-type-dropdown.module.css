@@ -1,0 +1,22 @@
+.dropdown-wrapper {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.dropdown-button {
+    width: 100%;
+    margin: 0;
+    height: 40px;
+    font-size: 1.2rem;
+    font-weight: 1.5;
+    line-height: 1.5;
+}
+
+.options-wrapper {
+    height: 600px;
+    background-color: #fff;
+}
+
+.closed-options { 
+    display: none;
+}
