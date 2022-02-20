@@ -7,7 +7,7 @@ import './App.css'
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const sideWidth = menuOpen ? "300px" : "65px"
+  const sideWidth = menuOpen ? "300px" : "45px"
 
   return (
     <div className="App" id="outer-container">
