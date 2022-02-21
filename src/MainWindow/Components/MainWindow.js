@@ -1,10 +1,17 @@
 import "./Styles/main-window.css"
 
-function MainWindow() {
+function MainWindow({ currentFile }) {
+    const title = currentFile ? currentFile : "Welcome, open or create a file to begin"
     return (
         <div>
             <div className="window-header">
-                <h1>Main Window</h1>
+                <h1>{title}</h1>
+            </div>
+
+            <div className="window-body">
+                <div className="file-view">
+                    <p>Some kind of text</p>
+                </div>
             </div>
         </div>
     )

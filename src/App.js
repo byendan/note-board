@@ -6,9 +6,11 @@ import MainWindow from "./MainWindow/Components/MainWindow"
 import './App.css'
 
 function App() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const sideWidth = menuOpen ? "300px" : "45px"
+  const [menuOpen, setMenuOpen] = useState(true)
+  const [currentFile, setCurrentFile] = useState(null)
 
+  const sideWidth = menuOpen ? "300px" : "45px"
+  
   return (
     <div className="App" id="outer-container">
       <div className="page-wrap" id="page-wrap">
@@ -19,6 +21,7 @@ function App() {
               <Sidebar 
                 menuOpen={menuOpen}
                 setMenuOpen={setMenuOpen}
+                selectFile={setCurrentFile}
               />
             </div>
 
@@ -26,7 +29,9 @@ function App() {
             className="mainwindow-box"
             style={{ left: sideWidth }}
           >
-            <MainWindow />
+            <MainWindow 
+              currentFile={currentFile}
+            />
           </div>
       </div>
     </div>

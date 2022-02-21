@@ -1,10 +1,6 @@
-const { contextBridge } = require('electron')
+const { contextBridge, ipcRenderer } = require('electron')
+const { preload: loadRoot } = require('./FileService/RootPath')
+const { preload: loadNotes } = require('./FileService/NotePath')
 
-console.log("Hello World!!!!!!!!!!!!!!!!!!!!!!")
-
-contextBridge.exposeInMainWorld(
-    'backend',
-    {
-        sayHello: () => console.log("Hello there!")
-    }   
-)
+loadRoot(contextBridge, ipcRenderer);
+loadNotes(contextBridge, ipcRenderer)
