@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import Styles from "./Styles/file-view.module.css"
 
-function FileView({selectFile}) {
+function FileView({selectFile, currentFile}) {
     const [fileNames, setFiles] = useState([])
 
     useEffect(() => {
         window.noteService.list(setFiles)
-    }, [true])
+    }, [currentFile])
 
     const fileRows = fileNames.map(fileName => {
         return (

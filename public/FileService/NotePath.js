@@ -3,8 +3,9 @@ const fs = require('fs')
 
 const appNotes = (ipcMain, app) => {
     handleLookupNotes(ipcMain, app)
-    handleCreateNote(ipcMain)
+    handleCreateNote(ipcMain, app)
     handleShowNote(ipcMain)
+    handleUpdateNoteName(ipcMain, app)
 }
 
 // API:
@@ -14,8 +15,9 @@ const appNotes = (ipcMain, app) => {
 const preload = (contextBridge, ipcRenderer) => {
     contextBridge.exposeInMainWorld('noteService',{
         list: (setNotes) => lookupNotes(setNotes),
-        new: (name) => createNote(name),
-        show: (name) => showNote(name)
+        new: (name, setCurrentNote) => createNote(name, setCurrentNote),
+        show: (name) => showNote(name),
+        updateName: (originalName, newName) => updateNoteName(originalName, newName)
     })
 }
 
@@ -33,15 +35,18 @@ const handleLookupNotes = (ipcMain, app) => {
 }
 
 const createNote = (name, setCurrentNote) => {
-    ipcRenderer.invoke('notes:new').then((result) => {
+    console.log("create note with name: ", name)
+    ipcRenderer.invoke('notes:new', name).then((result) => {
         setCurrentNote(result)
     })
 }
 
-const handleCreateNote = (ipcMain) => {
-    ipcMain.handle('notes:new', (result) => {
-        // create a note file
-        return "new file"
+const handleCreateNote = (ipcMain, app) => {
+    ipcMain.handle('notes:new', (req, name) => {
+        console.log("notes:new received name: ", name)
+        const filePath = `${app.getAppPath()}/Public/Storage/Notes/${name}`
+        fs.closeSync(fs.openSync(filePath, 'w'));
+        return name
     })
 }
 
@@ -54,6 +59,21 @@ const showNote = (name, setNote) => {
 const handleShowNote = (ipcMain) => {
     ipcMain.handle('notes:show', (result) => {
         return 'This file sure has some interesting content'
+    })
+}
+
+const updateNoteName = (originalName, newName) => {
+    ipcRenderer.invoke('notes:updateName', originalName, newName).then((result) => {
+        return 'name updated'
+    })
+}
+
+const handleUpdateNoteName = (ipcMain, app) => {
+    ipcMain.handle('notes:updateName', (req, originalName, newName) => {
+        const baseFilePath = `${app.getAppPath()}/Public/Storage/Notes/`
+        const originalPath = `${baseFilePath}${originalName}`
+        const newPath = `${baseFilePath}${newName}`
+        fs.rename(originalPath, newPath, () => 'name updated')
     })
 }
 

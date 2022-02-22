@@ -1,18 +1,25 @@
+import React from "react"
+import FileDisplay from "./FileDisplay"
 import "./Styles/main-window.css"
+import WelcomePage from "./WelcomPage"
 
-function MainWindow({ currentFile }) {
-    const title = currentFile ? currentFile : "Welcome, open or create a file to begin"
+function MainWindow({ currentFile, updateFileName }) {
+    const loadDisplay = () => {
+        if (currentFile || currentFile === '') {
+            return (
+                <FileDisplay
+                    fileName={currentFile}
+                    updateFileName={updateFileName}
+                />
+            )
+        } else {
+            <WelcomePage />
+        }
+    }
+
     return (
         <div>
-            <div className="window-header">
-                <h1>{title}</h1>
-            </div>
-
-            <div className="window-body">
-                <div className="file-view">
-                    <p>Some kind of text</p>
-                </div>
-            </div>
+            {loadDisplay()}
         </div>
     )
 }
