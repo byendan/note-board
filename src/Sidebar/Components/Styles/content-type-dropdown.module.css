@@ -1,6 +1,6 @@
 .dropdown-wrapper {
+    position: relative;
     width: 100%;
-    margin-top: 10px;
 }
 
 .dropdown-button {
@@ -13,6 +13,8 @@
 }
 
 .options-wrapper {
+    position: fixed;
+    left: 100%;
     height: 600px;
     background-color: #fff;
 }
