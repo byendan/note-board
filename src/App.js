@@ -7,7 +7,9 @@ import './App.css'
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(true)
-  const [currentFile, setCurrentFile] = useState(null)
+  const [currentFile, setCurrentFile] = useState("Lorem Ipsum")
+
+  console.log("APP RENDERING")
 
   const sideWidth = menuOpen ? "300px" : "45px"
   
@@ -16,14 +18,12 @@ function App() {
     setCurrentFile(fileName)
   }
 
-  const updateCurrentFileName = (originalName, newName) => {
-    window.noteService.updateName(originalName, newName)
-    setCurrentFile(newName)
-  }
-
   return (
     <div className="App" id="outer-container">
-      <div className="page-wrap" id="page-wrap">
+      <div className="window-header">
+          <b>Notes</b>
+      </div>
+      <div className="content-wrap" id="content-wrap">
             <div 
               className="sidebar-box"
               style={{ width: sideWidth }}
@@ -43,7 +43,7 @@ function App() {
           >
             <MainWindow 
               currentFile={currentFile}
-              updateFileName={updateCurrentFileName}
+              fileType="Note"
             />
           </div>
       </div>
