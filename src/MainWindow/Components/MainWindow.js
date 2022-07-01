@@ -1,25 +1,13 @@
 import React from "react"
-import FileDisplay from "./FileDisplay"
+import NotePage from "./NotePage"
 import "./Styles/main-window.css"
-import WelcomePage from "./WelcomPage"
 
-function MainWindow({ currentFile, updateFileName }) {
-    const loadDisplay = () => {
-        if (currentFile || currentFile === '') {
-            return (
-                <FileDisplay
-                    fileName={currentFile}
-                    updateFileName={updateFileName}
-                />
-            )
-        } else {
-            <WelcomePage />
-        }
-    }
-
+function MainWindow({ currentFile, fileType }) {
     return (
         <div>
-            {loadDisplay()}
+            <NotePage 
+                noteName={currentFile}
+            />
         </div>
     )
 }

@@ -5,8 +5,9 @@ function FileView({selectFile, currentFile}) {
     const [fileNames, setFiles] = useState([])
 
     useEffect(() => {
+        console.log("Using File List API")
         window.noteService.list(setFiles)
-    }, [currentFile])
+    }, [true])
 
     const fileRows = fileNames.map(fileName => {
         return (

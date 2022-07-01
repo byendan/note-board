@@ -2,9 +2,18 @@
   box-sizing: border-box;
 }
 
-.page-warp {
-  padding-bottom: 10px;
-  padding-top: 10px;
+.window-header {
+  height: 24px;
+  text-align: center;
+  font-size: 10pt;
+  padding: 0;
+  padding-top: 2px;
+  background-color: #eeeeee;
+  border-bottom: solid 0.5px #29292975;
+}
+
+.content-wrap {
+  padding: 0;
 }
 
 .sidebar-box {
